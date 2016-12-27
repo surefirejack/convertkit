@@ -1,0 +1,26 @@
+{
+    "name": "surefirejack/convertkit",
+    "type": "library",
+    "description": "ConvertKit SDK",
+    "keywords": ["convertkit", "ConvertKit"],
+    "homepage": "https://github.com/surefirejack/convertkit",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jack Born",
+            "email": "job@jackborn.com",
+            "homepage": "http://jackborn.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "lib-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "ConvertKit\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
