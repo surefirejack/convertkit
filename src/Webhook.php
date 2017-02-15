@@ -15,7 +15,7 @@ class Webhook extends ConvertKit {
         $this->url_base = $url_base;
         $this->api_key = $api_key;
         $this->api_secret_key = $api_secret_key;
-        $this->request_url = "{$this->url_base}/automations/hooks?api_key=".$this->api_key;
+        $this->request_url = "{$this->url_base}/automations/hooks";
     }
 
     public function setRuleId($id)
