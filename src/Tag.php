@@ -55,11 +55,11 @@ class Tag extends ConvertKit {
     }
 
 
-    // public function add($post_data) {
-    //     $payload = array_merge(array('api_secret' => $this->api_secret_key), $post_data);
-    //     $this->response = $this->curl($this->request_url, $payload);
-    //     return $this->response;
-    // }
+    public function add($post_data) {
+        $payload = array_merge(array('api_secret' => $this->api_secret_key), $post_data);
+        $this->response = $this->curl($this->request_url, $payload);
+        return $this->response;
+    }
 
     
 }
