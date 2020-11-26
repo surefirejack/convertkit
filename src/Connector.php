@@ -53,8 +53,7 @@ class Connector {
     public function curl($url, $params_data = array(), $verb = "", $custom_method = "") {
 
 
-
-
+        
         $debug_str1 = "";
         $request = curl_init();
         $debug_str1 .= "\$ch = curl_init();\n";
@@ -102,18 +101,16 @@ class Connector {
                 curl_setopt($request, CURLOPT_CUSTOMREQUEST, "POST");
             }
 
-
-
             $debug_str1 .= "curl_setopt(\$ch, CURLOPT_HTTPHEADER, array(\"Expect:\"));\n";
             if ($this->debug) {
                 curl_setopt($request, CURLINFO_HEADER_OUT, 1);
                 $debug_str1 .= "curl_setopt(\$ch, CURLINFO_HEADER_OUT, 1);\n";
-                $this->dbg($data, 1, "pre", "Description: POST data");
+                $this->dbg($debug_str1, 1, "pre", "Description: POST data");
             }
             curl_setopt($request, CURLOPT_POSTFIELDS, $params_data);
             curl_setopt($request, CURLOPT_HTTPHEADER, array(
-                    'Content-Type: application/json',
-                    'Content-Length: ' . strlen($params_data))
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($params_data))
             );
 
             $debug_str1 .= "curl_setopt(\$ch, CURLOPT_POSTFIELDS, \"" . $params_data . "\");\n";
@@ -123,9 +120,6 @@ class Connector {
 
         $debug_str1 .= "curl_setopt(\$ch, CURLOPT_SSL_VERIFYPEER, false);\n";
         $debug_str1 .= "curl_setopt(\$ch, CURLOPT_SSL_VERIFYHOST, 0);\n";
-//    return $debug_str1;
-
-
 
         $response = curl_exec($request);
         $curl_error = curl_error($request);
@@ -154,16 +148,24 @@ class Connector {
         if ($this->debug) {
             $this->dbg($object, 1, "pre", "Description: Response object (json_decode)");
         }
-        if ( !is_object($object)  ) {
-            // add methods that only return a string
-            $string_responses = array("tags_list", "segment_list", "tracking_event_remove", "contact_list", "form_html", "tracking_site_status", "tracking_event_status", "tracking_whitelist", "tracking_log", "tracking_site_list", "tracking_event_list");
-            if (in_array($method, $string_responses)) {
-                return $response;
-            }
 
-            $requestException = new RequestException;
-            $requestException->setFailedMessage($response);
-            throw $requestException;
+        if ( !is_object($object)  ) {
+
+            // NOTE: The commented out code below doesn't work because $method is not defined
+            // We'll keep it commented out, until we realize what methods are only returning string.
+
+            // Add methods that only return a string
+            // $string_responses = array("tags_list", "segment_list", "tracking_event_remove", "contact_list", "form_html", "tracking_site_status", "tracking_event_status", "tracking_whitelist", "tracking_log", "tracking_site_list", "tracking_event_list");
+            // if (in_array($method, $string_responses)) {
+            //     return $response;
+            // }
+
+            // NOTE: Also preventing throwing an error because this code has never run
+            // So we are not sure how it will affect the API calls
+
+            // $requestException = new RequestException;
+            // $requestException->setFailedMessage($response);
+            // throw $requestException;
         }
 
         if ($this->debug) {
